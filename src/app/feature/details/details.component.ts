@@ -13,37 +13,37 @@ import { GetWeatherService } from 'src/app/shared/services/weather/get-weather.s
   providers: [MessageService]
 })
 export class DetailsComponent implements OnInit {
-  @ViewChild('input', {static:true}) input: ElementRef;
-  cities : cityType[] = [];
-  city : string ;
+  @ViewChild('input', {static: true}) input: ElementRef;
+  cities:cityType[] = [];
+  city:string;
   choosenCity: any ;
   cityInfo: any;
-  constructor(private getCities:GetCitiesService, private getWeatherService: GetWeatherService, private messageService: MessageService) { }
+  constructor(private getCities: GetCitiesService, private getWeatherService: GetWeatherService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getCities.getAll().pipe(
-      map((cities)=>{
+      map( (cities) => {
         this.cities = cities;
       })
-    ).subscribe()
+    ).subscribe();
 
-    fromEvent(this.input.nativeElement,'keyup').pipe(
+    fromEvent(this.input.nativeElement, 'keyup').pipe(
       debounceTime(700),
       distinctUntilChanged(),
-      tap(()=>{
+      tap( () => {
         this.getCity();
       })
     ).subscribe();
   }
   cityClick(event){
-    this.city=event.target.innerText;
+    this.city = event.target.innerText;
     this.getCity();
   }
 
   getCity(){
     this.getWeatherService.get(this.city).pipe(
-      catchError((error)=>{
-        this.messageService.add({severity:'error', summary:'Error', detail:"Can't find city"});
+      catchError( (error) => {
+        this.messageService.add( {severity:'error' , summary:'Error' , detail:"Can't find city"} );
         return of([]);
       }),
       tap((value)=>{
