@@ -1,0 +1,43 @@
+<p-toast position="top-left"></p-toast>
+<div class="details-wrapper">
+  <div class="search-icon">
+    <i class="fas fa-search"></i>
+  </div>
+  <div class="details-content">
+
+    <div class="search">
+      <input placeholder="city" type="text" #input [(ngModel)]="city" >
+    </div>
+
+    <div class="cities">
+      <div (click)="cityClick($event)" *ngFor="let city of cities">{{city['name_en']}}</div>
+    </div>
+
+    <div class="details-line"></div>
+
+    <div class="details">
+      <h2>Weather Details</h2>
+      <div class="weather-details-content">
+        <div class="left-column">
+          <h3>Temperature</h3>
+          <h3>Feels like</h3>
+          <h3>Clouds</h3>
+          <h3>Humidity</h3>
+          <h3>Wind</h3>
+          <h3>Weather</h3>
+        </div>
+        <div class="right-column" *ngIf="cityInfo">
+          <h3>{{cityInfo.main.temp}}&#8451;</h3>
+          <h3>{{cityInfo.main.feels_like}}&#8451;</h3>
+          <h3>{{cityInfo.clouds.all}}%</h3>
+          <h3>{{cityInfo.main.humidity}}%</h3>
+          <h3>{{cityInfo.wind.speed}}m/s</h3>
+          <h3>{{cityInfo.weather[0].description}}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="details-line"></div>
+
+  </div>
+</div>
