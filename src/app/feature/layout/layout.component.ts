@@ -23,6 +23,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       tap(()=>{
         switch(this.weatherInfo['weather'][0]['main']){
           case 'Rain':
+          case 'Drizzle':
+          case 'Thunderstorm':
             this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('../../../assets/images/weather/rain.jpg')`;
             break;
           case 'Clouds':
