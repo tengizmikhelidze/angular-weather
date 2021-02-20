@@ -18,17 +18,17 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.getWeatherService.citySubject.pipe(
       tap(()=>{
-        this.image.nativeElement.src = `../../../assets/images/icons/weather/${this.iconId}.png`;
+        this.image.nativeElement.src = `assets/images/icons/weather/${this.iconId}.png`;
       }),
       tap(()=>{
         switch(this.weatherInfo['weather'][0]['main']){
           case 'Rain':
           case 'Drizzle':
           case 'Thunderstorm':
-            this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('src/assets/images/weather/rain.jpg')`;
+            this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/rain.jpg')`;
             break;
           case 'Clouds':
-            this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('src/assets/images/weather/clouds.png')`;
+            this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/clouds.png')`;
             break;
           case 'Clear':
             this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('src/assets/images/weather/sunny.jfif')`;
