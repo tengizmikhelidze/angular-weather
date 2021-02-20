@@ -7,7 +7,7 @@ import { cityType } from './cityType';
   providedIn: 'root'
 })
 export class GetCitiesService {
-  private URL = `http://localhost:3000/cities`;
+  private URL = `https://my-json-server.typicode.com/tengizmikhelidze/cityserver/cities`;
   constructor(private http: HttpClient) { }
   getAll(): Observable<cityType[]>{
     return this.http.get<cityType[]>(this.URL);
