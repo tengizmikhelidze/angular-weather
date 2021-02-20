@@ -1,0 +1,21 @@
+<div class="layout-wrapper" #background>
+  <h2>Georgian Weather</h2>
+  <div class="weather-info">
+    <div class="degree">
+      <p>{{this.weatherInfo['main']['temp'].toFixed(0)}}</p>
+      <span>&#8451;</span>
+    </div>
+    <div class="city">
+      <div class="city-name">{{this.cityInfo['city']['name']}}</div>
+      <div class="city-date">{{this.date[0]}}</div>
+    </div>
+    <div class="weather">
+      <div class="weather-icon">
+        <img #image src="../../../assets/images/icons/weather/04d.png">
+      </div>
+      <div class="weather-title">
+        <p>{{this.weatherInfo['weather'][0]['main']}}</p>
+      </div>
+    </div>
+  </div>
+</div>

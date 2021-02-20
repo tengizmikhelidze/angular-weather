@@ -7,7 +7,7 @@ import { GetCitiesService } from 'src/app/shared/services/cities/get-cities.serv
 import { GetWeatherService } from 'src/app/shared/services/weather/get-weather.service';
 
 @Component({
-  selector: 'app-details',
+  selector: 'app-feature-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
   providers: [MessageService]
@@ -15,10 +15,12 @@ import { GetWeatherService } from 'src/app/shared/services/weather/get-weather.s
 export class DetailsComponent implements OnInit {
   @ViewChild('input', {static: true}) input: ElementRef;
   cities:cityType[] = [];
-  city:string;
+  city:string =`tbilisi`;
   choosenCity: any ;
   cityInfo: any;
-  constructor(private getCities: GetCitiesService, private getWeatherService: GetWeatherService, private messageService: MessageService) { }
+  constructor(private getCities: GetCitiesService, private getWeatherService: GetWeatherService, private messageService: MessageService) {
+    this.getCity();
+  }
 
   ngOnInit(): void {
     this.getCities.getAll().pipe(
@@ -61,6 +63,6 @@ export class DetailsComponent implements OnInit {
           this.messageService.add({severity:'success', summary:`${this.city}`, detail:"Found"});
         }
       }),
-    ).subscribe((response)=>{})
+    ).subscribe()
   }
 }

@@ -7,7 +7,7 @@ import {ToastModule} from 'primeng/toast';
 const components = [DetailsComponent]
 
 @NgModule({
-  declarations: [DetailsComponent],
+  declarations: [...components],
   imports: [
     CommonModule,
     FormsModule,
