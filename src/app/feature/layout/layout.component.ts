@@ -38,7 +38,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
             break;
         }
       })
-    ).subscribe()
+    ).subscribe();
   }
 
   ngOnInit(): void {
@@ -63,7 +63,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
           }
         }
       }),
-    ).subscribe()
+    ).subscribe();
   }
 
 }

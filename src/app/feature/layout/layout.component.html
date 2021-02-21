@@ -1,11 +1,12 @@
 <div class="layout-wrapper" #background>
-  <h2>Georgian Weather</h2>
-  <div class="weather-info">
+  <span></span>
+  <div class="weather-info" id="weatherInfo">
     <div class="degree">
       <p>{{this.weatherInfo['main']['temp'].toFixed(0)}}</p>
       <span>&#8451;</span>
     </div>
     <div class="city">
+      <h2 class="logo">Georgian Weather</h2>
       <div class="city-name">{{this.cityInfo['city']['name']}}</div>
       <div class="city-date">{{this.date[0]}}</div>
     </div>

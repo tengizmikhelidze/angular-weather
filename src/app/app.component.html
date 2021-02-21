@@ -1,8 +1,15 @@
 <div class="application">
   <div class="left-column">
+    <button class="menu-toggle-btn" (click)="toggleMenu()" *ngIf="toggleIsVisible">
+      <div class="menu-toggle-btn__line"></div>
+      <div class="menu-toggle-btn__line"></div>
+      <div class="menu-toggle-btn__line"></div>
+    </button>
     <app-feature-layout></app-feature-layout>
   </div>
   <div class="right-column">
-    <app-feature-details></app-feature-details>
+    <div class="right-column-content" [ngStyle]="{'display': menuVisability}" [@detail]>
+      <app-feature-details></app-feature-details>
+    </div>
   </div>
 </div>

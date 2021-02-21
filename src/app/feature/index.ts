@@ -4,4 +4,4 @@ import { LayoutModule } from "./layout/layout.module";
 export const modules = [
   DetailsModule,
   LayoutModule
-]
+];
