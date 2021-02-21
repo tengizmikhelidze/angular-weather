@@ -13,10 +13,10 @@ import { GetWeatherService } from 'src/app/shared/services/weather/get-weather.s
   providers: [MessageService]
 })
 export class DetailsComponent implements OnInit {
-  @ViewChild('input', {static: true}) input: ElementRef;
-  cities:cityType[] = [];
-  city:string =`tbilisi`;
-  choosenCity: any ;
+  @ViewChild('input', { static: true }) input: ElementRef;
+  cities: cityType[] = [];
+  city: string = `tbilisi`;
+  choosenCity: any;
   cityInfo: any;
   constructor(private getCities: GetCitiesService, private getWeatherService: GetWeatherService, private messageService: MessageService) {
     this.getCity();
@@ -24,43 +24,43 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCities.getAll().pipe(
-      map( (cities) => {
+      map((cities) => {
         this.cities = cities;
       })
     ).subscribe();
 
     fromEvent(this.input.nativeElement, 'keyup').pipe(
-      debounceTime(700),
+      debounceTime(1000),
       distinctUntilChanged(),
-      tap( () => {
+      tap(() => {
         this.getCity();
       })
     ).subscribe();
   }
-  cityClick(event){
+  cityClick(event) {
     this.city = event.target.innerText;
     this.getCity();
   }
 
-  getCity(){
+  getCity() {
     this.getWeatherService.get(this.city).pipe(
-      catchError( (error) => {
-        this.messageService.add( {severity:'error' , summary:'Error' , detail:"Can't find city"} );
+      catchError((error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: "Can't find city" });
         return of([]);
       }),
-      tap((value)=>{
-        if(value.length !==0){
+      tap((value) => {
+        if (value.length !== 0) {
           let date = new Date();
           let miliseconds = date.getTime();
-          this.choosenCity=value;
-          for(let i =0; i<this.choosenCity['list'].length; i++){
+          this.choosenCity = value;
+          for (let i in this.choosenCity['list']) {
             let otherDate = new Date(this.choosenCity['list'][i]['dt_txt']);
-            if(otherDate.getTime()>miliseconds){
-              this.cityInfo = this.choosenCity['list'][i-1];
+            if (otherDate.getTime() > miliseconds) {
+              this.cityInfo = this.choosenCity['list'][Number(i) - 1];
               break;
             }
           }
-          this.messageService.add({severity:'success', summary:`${this.city}`, detail:"Found"});
+          this.messageService.add({ severity: 'success', summary: `${this.city}`, detail: "Found" });
         }
       }),
     ).subscribe()

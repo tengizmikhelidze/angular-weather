@@ -1,4 +1,4 @@
-:host{
+:host {
   width: 33%;
   height: 100%;
   position: fixed;
@@ -6,41 +6,55 @@
   top: 0;
   z-index: 20;
   overflow-y: scroll;
-  background-color: rgba(13,34,43,0.9);
+  background-color: rgba(13, 34, 43, 0.9);
   box-sizing: border-box;
   padding: 30px;
 }
-.details-wrapper{
-  .search-icon{
+
+.notification {
+  @media (max-width: 1020px) {
+    display: none;
+  }
+}
+
+.details-wrapper {
+  .search-icon {
     position: absolute;
     top: 0;
     right: 0;
-    background-color: rgba(214,108,5,255);
+    background-color: rgba(214, 108, 5, 255);
     width: 15%;
     height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
-    i{
+
+    i {
       font-size: 1.6em;
-      color: rgba(13,34,43,0.9);
+      color: rgba(13, 34, 43, 0.9);
     }
   }
-  .details-content{
+
+  .details-content {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: column;
-    > div {
-      margin-bottom: 40px;
+
+    >div {
+      margin-bottom: 30px;
     }
-    .search{
+
+    .search {
       height: 40px;
       width: 100%;
       margin-left: 0px;
       position: relative;
-      input{
+      @media(max-width: 1020px) {
+        margin-top: 10px;
+      }
+      input {
         width: 75%;
         position: absolute;
         bottom: 0;
@@ -53,8 +67,9 @@
         letter-spacing: 1px;
       }
     }
-    .cities{
-      div{
+
+    .cities {
+      div {
         cursor: pointer;
         width: 25%;
         margin-bottom: 10px;
@@ -63,10 +78,18 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        &:hover{
+        column-count: 2;
+        @media(max-width: 450px) {
+          font-size: 16px;
+          width: 33%;
+          justify-content: center;
+
+        }
+        &:hover {
           color: #f9fafa;
         }
       }
+
       width: 100%;
       height: 100%;
       display: flex;
@@ -74,34 +97,41 @@
       justify-content: flex-start;
       align-items: center;
     }
-    .details-line{
+
+    .details-line {
       width: 100%;
       height: 1px;
       background-color: #717e85;
     }
-    .details{
+
+    .details {
       width: 100%;
-      h2{
-        margin-bottom: 30px;
+
+      h2 {
+        margin-bottom: 20px;
         color: #f9fafa;
         font-weight: 600;
         font-size: 18px;
       }
-      .weather-details-content{
+
+      .weather-details-content {
         width: 100%;
         height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
         font-size: 18px;
         font-weight: 300;
-        h3{
+
+        h3 {
           margin-bottom: 15px;
           color: #717e85;
         }
-        .right-column{
-          h3{
+
+        .right-column {
+          h3 {
             color: #f9fafa;
           }
+
           justify-self: right;
         }
       }
