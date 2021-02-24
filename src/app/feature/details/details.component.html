@@ -2,13 +2,13 @@
   <p-toast position="top-left"></p-toast>
 </div>
 <div class="details-wrapper">
-  <div class="search-icon">
+  <div class="search-icon" (click)="this.getCity()">
     <i class="fas fa-search"></i>
   </div>
   <div class="details-content">
 
     <div class="search">
-      <input placeholder="city" type="text" #input [(ngModel)]="city">
+      <input (submit)="this.getCity()" placeholder="city" type="text" #input [(ngModel)]="city">
     </div>
 
     <div class="cities">

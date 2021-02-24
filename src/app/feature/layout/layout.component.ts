@@ -34,7 +34,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
             this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/sunny.jfif')`;
             break;
           case 'Snow':
-            this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/snow.jpg')`;
+            this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%), url('assets/images/weather/snow.jpg')`;
             break;
         }
       })

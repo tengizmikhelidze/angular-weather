@@ -19,16 +19,11 @@ export class DetailsComponent implements OnInit {
   choosenCity: any;
   cityInfo: any;
   constructor(private getCities: GetCitiesService, private getWeatherService: GetWeatherService, private messageService: MessageService) {
+    this.cities = this.getCities.getAll();
     this.getCity();
   }
 
   ngOnInit(): void {
-    this.getCities.getAll().pipe(
-      map((cities) => {
-        this.cities = cities;
-      })
-    ).subscribe();
-
     fromEvent(this.input.nativeElement, 'keyup').pipe(
       debounceTime(1000),
       distinctUntilChanged(),
