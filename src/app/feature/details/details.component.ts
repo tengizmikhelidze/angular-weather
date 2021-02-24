@@ -86,7 +86,6 @@ export class DetailsComponent implements OnInit {
         }),
       ).subscribe()
     } else {
-      console.log(latitude, longitude);
       this.getWeatherService.getByChords(latitude,longitude).pipe(
         catchError((error) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: "Can't find city" });
@@ -104,7 +103,7 @@ export class DetailsComponent implements OnInit {
                 break;
               }
             }
-            this.messageService.add({ severity: 'success', summary: `${this.city}`, detail: "Found" });
+            this.messageService.add({ severity: 'success', summary: `${value['city']['name']}`, detail: "Found" });
           }
         }),
       ).subscribe()
