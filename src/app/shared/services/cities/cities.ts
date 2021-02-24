@@ -67,11 +67,6 @@ export const cities:cityType[] = [
     "location" : "41.7438812,45.78938059999996"
   },
   {
-    "name_ka" : "დედოფლისწყარო",
-    "name_en" : "Dedoplistskaro",
-    "location" : "41.4672254,46.117521500000066"
-  },
-  {
     "name_ka" : "დმანისი",
     "name_en" : "Dmanisi",
     "location" : "41.3298054,44.207312499999944"
@@ -125,11 +120,6 @@ export const cities:cityType[] = [
     "name_ka" : "ლაგოდეხი",
     "name_en" : "Lagodekhi",
     "location" : "41.8186298,46.278130799999985"
-  },
-  {
-    "name_ka" : "ლანჩხუთი",
-    "name_en" : "Lanchkhuti",
-    "location" : "42.0902225,42.03597119999995"
   },
   {
     "name_ka" : "მარნეული",

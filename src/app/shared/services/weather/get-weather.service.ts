@@ -18,7 +18,7 @@ export class GetWeatherService {
     );
   }
   getByChords(lat, lon): Observable<{}[]>{
-    const URL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=95bd999ad2177356216f7a43b4975d3b`;
+    const URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=95bd999ad2177356216f7a43b4975d3b`;
     return this.http.get<{}[]>(URL).pipe(
       map((info)=>{
         this.citySubject.next(info);

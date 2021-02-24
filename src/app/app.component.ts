@@ -51,10 +51,16 @@ export class AppComponent implements OnInit {
       this.menuVisability = 'none';
     }
   }
+  hideMenu(event){
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth < 1024) {
+      if(event==='true') this.menuVisability = 'none';
+    }
+  }
   @HostListener('window:resize', ['$event'])
   getScreenSize() {
     this.screenWidth = window.innerWidth;
-    if (this.screenWidth < 1020) {
+    if (this.screenWidth < 1024) {
       this.toggleIsVisible = true;
     } else {
       this.toggleIsVisible = false;

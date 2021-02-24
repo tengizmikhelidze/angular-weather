@@ -50,6 +50,7 @@ export class DetailsComponent implements OnInit {
       debounceTime(1000),
       distinctUntilChanged(),
       tap(() => {
+        this.cityChanded.emit('true');
         this.getCity();
       })
     ).subscribe();
@@ -62,7 +63,6 @@ export class DetailsComponent implements OnInit {
   }
 
   getCity(latitude?: number, longitude?: number) {
-    this.cityChanded.emit('true');
     if(!longitude && !latitude){
       this.getWeatherService.get(this.city).pipe(
         catchError((error) => {
