@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewChild,EventEmitter } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { fromEvent, of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
@@ -14,6 +14,8 @@ import { GetWeatherService } from 'src/app/shared/services/weather/get-weather.s
 })
 export class DetailsComponent implements OnInit {
   @ViewChild('input', { static: true }) input: ElementRef;
+  @Output() cityChanded = new EventEmitter();
+
   cities: cityType[] = [];
   city: string;
   choosenCity: any;
@@ -26,6 +28,11 @@ export class DetailsComponent implements OnInit {
       });
       navigator.permissions.query({name:'geolocation'}).then((result) => {
         if(result.state === 'denied'){
+          this.messageService.add({ severity: 'error', summary: "Location servise isn't Allowed", detail: "Allow Location and refresh page" });
+          this.city = "Tbilisi"
+          this.getCity();
+        }
+        if(result.state === 'prompt'){
           this.messageService.add({ severity: 'error', summary: "Location servise isn't Allowed", detail: "Allow Location and refresh page" });
           this.city = "Tbilisi"
           this.getCity();
@@ -47,12 +54,15 @@ export class DetailsComponent implements OnInit {
       })
     ).subscribe();
   }
+
   cityClick(event) {
     this.city = event.target.innerText;
+    this.cityChanded.emit('true');
     this.getCity();
   }
 
   getCity(latitude?: number, longitude?: number) {
+    this.cityChanded.emit('true');
     if(!longitude && !latitude){
       this.getWeatherService.get(this.city).pipe(
         catchError((error) => {

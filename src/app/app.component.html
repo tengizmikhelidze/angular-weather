@@ -9,7 +9,7 @@
   </div>
   <div class="right-column">
     <div class="right-column-content" [ngStyle]="{'display': menuVisability}">
-      <app-feature-details></app-feature-details>
+      <app-feature-details (cityChanded)="toggleMenu()"></app-feature-details>
     </div>
   </div>
 </div>
