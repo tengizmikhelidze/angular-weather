@@ -33,6 +33,8 @@ export class DetailsComponent implements OnInit {
       })
     } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: "Location servise isn't supported your browser" });
+      this.city="tbilisi";
+      this.getCity();
     }
   }
 
