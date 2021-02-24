@@ -10,14 +10,17 @@ import { GetWeatherService } from 'src/app/shared/services/weather/get-weather.s
 export class LayoutComponent implements OnInit, AfterViewInit {
   @ViewChild('image') image: ElementRef;
   @ViewChild('background') background: ElementRef;
-  cityInfo : {} = {};
-  weatherInfo : {} = {main: {temp:0}};
+  cityInfo = {name: 'Default'};
+  weatherInfo = {main: {temp: 0},weather: [{main: 'default'}]};
   date : Array<string>= ['undefined'];
   iconId : string;
-  constructor(private getWeatherService: GetWeatherService) { }
+  constructor(private getWeatherService: GetWeatherService) {
+  }
+
   ngAfterViewInit(): void {
     this.getWeatherService.citySubject.pipe(
       tap(()=>{
+        if(!this.iconId) this.iconId="01d";
         this.image.nativeElement.src = `assets/images/icons/weather/${this.iconId}.png`;
       }),
       tap(()=>{
@@ -44,8 +47,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getWeatherService.citySubject.pipe(
       tap((info)=>{
-        this.cityInfo = info;
-        return info;
+        if(info.length !== 0){
+          this.cityInfo = info['city'];
+          return info;
+        }
       }),
       tap((value)=>{
         if(value.length !==0){

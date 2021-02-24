@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { cities } from './cities';
-import { cityType } from './cityType';
+import { cityType } from '../../interfaces/cityType';
 
 @Injectable({
   providedIn: 'root'
