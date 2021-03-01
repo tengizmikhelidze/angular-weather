@@ -167,11 +167,6 @@ export const cities:cityType[] = [
     "location" : "42.1599257,42.33676779999996"
   },
   {
-    "name_ka" : "საჩხერე",
-    "name_en" : "Sachkhere",
-    "location" : "42.3420079,43.41060449999998"
-  },
-  {
     "name_ka" : "სენაკი",
     "name_en" : "Senaki",
     "location" : "42.2701283,42.04567080000004"
@@ -235,11 +230,6 @@ export const cities:cityType[] = [
     "name_ka" : "წყალტუბო",
     "name_en" : "Tskaltubo",
     "location" : "42.3284986,42.60036820000005"
-  },
-  {
-    "name_ka" : "ჭიათურა",
-    "name_en" : "Chiatura",
-    "location" : "42.29039059999999,43.28110779999997"
   },
   {
     "name_ka" : "ხაშური",

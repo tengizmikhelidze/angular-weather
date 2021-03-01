@@ -3,20 +3,25 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { GetWeatherService } from './shared/services/weather/get-weather.service';
-import { HttpClientModule } from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { modules } from './feature/index'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { featureModules } from './feature/index'
+import { HttpInterceptorService } from './shared/services/interceptor/http-interceptor.service';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ...modules
+    ...featureModules,
+    SharedModule
   ],
-  providers: [GetWeatherService],
+  providers: [GetWeatherService,
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,6 +14,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   weatherInfo = {main: {temp: 0},weather: [{main: 'default'}]};
   date : Array<string>= ['undefined'];
   iconId : string;
+  sunset : number = 20;
   constructor(private getWeatherService: GetWeatherService) {
   }
 
@@ -24,21 +25,43 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         this.image.nativeElement.src = `assets/images/icons/weather/${this.iconId}.png`;
       }),
       tap(()=>{
+        let date = new Date();
+        let hour = date.getHours();
         switch(this.weatherInfo['weather'][0]['main']){
           case 'Rain':
           case 'Drizzle':
           case 'Thunderstorm':
-            this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/rain.jpg')`;
-            break;
+            if(this.sunset >= hour){
+              this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/rain.jpg')`;
+              break;
+            } else {
+              this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/night_rain.jfif')`;
+              break;
+            }
           case 'Clouds':
-            this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/clouds.png')`;
-            break;
+            if(this.sunset >= hour){
+              this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/clouds.png')`;
+              break;
+            } else {
+              this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/night_clouds.jpg')`;
+              break;
+            }
           case 'Clear':
-            this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/sunny.jfif')`;
-            break;
+            if(this.sunset >= hour){
+              this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/sunny.jfif')`;
+              break;
+            } else {
+              this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/night_clear.jpg')`;
+              break;
+            }
           case 'Snow':
-            this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%), url('assets/images/weather/snow.jpg')`;
-            break;
+            if(this.sunset >= hour){
+              this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/snow.jpg')`;
+              break;
+            } else {
+              this.background.nativeElement.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), url('assets/images/weather/night_snow.jpg')`;
+              break;
+            }
         }
       })
     ).subscribe();
@@ -49,6 +72,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       tap((info)=>{
         if(info.length !== 0){
           this.cityInfo = info['city'];
+          let date = new Date(this.cityInfo['sunset']);
+          this.sunset = date.getHours();
           return info;
         }
       }),

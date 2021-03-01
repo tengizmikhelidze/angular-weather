@@ -1,15 +1,15 @@
-<div class="application">
-  <div class="left-column">
-    <button class="menu-toggle-btn" (click)="toggleMenu()" *ngIf="toggleIsVisible">
-      <div class="menu-toggle-btn__line"></div>
-      <div class="menu-toggle-btn__line"></div>
-      <div class="menu-toggle-btn__line"></div>
-    </button>
-    <app-feature-layout></app-feature-layout>
-  </div>
-  <div class="right-column">
-    <div class="right-column-content" [ngStyle]="{'display': menuVisability}">
-      <app-feature-details (cityChanded)="hideMenu($event)"></app-feature-details>
-    </div>
+<app-shared-component-loading></app-shared-component-loading>
+
+<div class="left-column">
+  <button class="menu-toggle-btn" (click)="toggleMenu()" *ngIf="toggleIsVisible">
+    <div class="menu-toggle-btn__line"></div>
+    <div class="menu-toggle-btn__line"></div>
+    <div class="menu-toggle-btn__line"></div>
+  </button>
+  <app-feature-layout></app-feature-layout>
+</div>
+<div class="right-column">
+  <div class="right-column-content" [ngStyle]="{'display': menuVisability}">
+    <app-feature-details (cityChanded)="hideMenu($event)"></app-feature-details>
   </div>
 </div>
