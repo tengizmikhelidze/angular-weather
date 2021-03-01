@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Output, ViewChild,EventEmitter } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewChild,EventEmitter, AfterViewInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { fromEvent, of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
@@ -12,10 +12,9 @@ import { GetWeatherService } from 'src/app/shared/services/weather/get-weather.s
   styleUrls: ['./details.component.scss'],
   providers: [MessageService]
 })
-export class DetailsComponent implements OnInit {
-  @ViewChild('input', { static: true }) input: ElementRef;
+export class DetailsComponent implements OnInit, AfterViewInit {
   @Output() cityChanded = new EventEmitter();
-
+  @ViewChild('input') input: ElementRef;
   cities: cityType[] = [];
   city: string;
   choosenCity: any;
@@ -44,16 +43,11 @@ export class DetailsComponent implements OnInit {
       this.getCity();
     }
   }
+  ngAfterViewInit(): void {
+  }
 
   ngOnInit(): void {
-    fromEvent(this.input.nativeElement, 'keyup').pipe(
-      debounceTime(1000),
-      distinctUntilChanged(),
-      tap(() => {
-        this.cityChanded.emit('true');
-        this.getCity();
-      })
-    ).subscribe();
+
   }
 
   cityClick(event) {
@@ -61,7 +55,6 @@ export class DetailsComponent implements OnInit {
     this.cityChanded.emit('true');
     this.getCity();
   }
-
   getCity(latitude?: number, longitude?: number) {
     if(!longitude && !latitude){
       this.getWeatherService.get(this.city).pipe(
