@@ -12,7 +12,7 @@ import { GetWeatherService } from 'src/app/shared/services/weather/get-weather.s
   styleUrls: ['./details.component.scss'],
   providers: [MessageService]
 })
-export class DetailsComponent implements OnInit, AfterViewInit {
+export class DetailsComponent implements OnInit {
   @Output() cityChanded = new EventEmitter();
   @ViewChild('input') input: ElementRef;
   cities: cityType[] = [];
@@ -43,8 +43,6 @@ export class DetailsComponent implements OnInit, AfterViewInit {
       this.getCity();
     }
   }
-  ngAfterViewInit(): void {
-  }
 
   ngOnInit(): void {
 
@@ -56,6 +54,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     this.getCity();
   }
   getCity(latitude?: number, longitude?: number) {
+    this.cityChanded.emit('true');
     if(!longitude && !latitude){
       this.getWeatherService.get(this.city).pipe(
         catchError((error) => {
