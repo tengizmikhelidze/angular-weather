@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Output, ViewChild,EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewChild,EventEmitter, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
@@ -23,6 +23,7 @@ export class DetailsComponent implements OnInit {
     private getCities: GetCitiesService,
     private getWeatherService: GetWeatherService,
     private messageService: MessageService,
+    private changeDetectorRef : ChangeDetectorRef
     ) {
     // if(navigator.geolocation){
       //   navigator.geolocation.getCurrentPosition((position)=>{
@@ -85,6 +86,7 @@ export class DetailsComponent implements OnInit {
             this.messageService.add({ severity: 'success', summary: `${this.city}`, detail: "Found" });
           }
         }),
+        tap(()=>this.changeDetectorRef.detectChanges())
       ).subscribe()
     } else {
       this.getWeatherService.getByChords(latitude,longitude).pipe(
