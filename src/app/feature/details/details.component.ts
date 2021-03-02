@@ -21,27 +21,29 @@ export class DetailsComponent implements OnInit {
   cityInfo: any;
   constructor(private getCities: GetCitiesService, private getWeatherService: GetWeatherService, private messageService: MessageService) {
     this.cities = this.getCities.getAll();
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition((position)=>{
-        this.getCity(position.coords.latitude, position.coords.longitude)
-      });
-      navigator.permissions.query({name:'geolocation'}).then((result) => {
-        if(result.state === 'denied'){
-          this.messageService.add({ severity: 'error', summary: "Location servise isn't Allowed", detail: "Allow Location and refresh page" });
-          this.city = "Tbilisi"
-          this.getCity();
-        }
-        if(result.state === 'prompt'){
-          this.messageService.add({ severity: 'error', summary: "Location servise isn't Allowed", detail: "Allow Location and refresh page" });
-          this.city = "Tbilisi"
-          this.getCity();
-        }
-      })
-    } else {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: "Location servise isn't supported your browser" });
-      this.city="tbilisi";
-      this.getCity();
-    }
+    // if(navigator.geolocation){
+    //   navigator.geolocation.getCurrentPosition((position)=>{
+    //     this.getCity(position.coords.latitude, position.coords.longitude)
+    //   });
+    //   navigator.permissions.query({name:'geolocation'}).then((result) => {
+    //     if(result.state === 'denied'){
+    //       this.messageService.add({ severity: 'error', summary: "Location servise isn't Allowed", detail: "Allow Location and refresh page" });
+    //       this.city = "Tbilisi"
+    //       this.getCity();
+    //     }
+    //     if(result.state === 'prompt'){
+    //       this.messageService.add({ severity: 'error', summary: "Location servise isn't Allowed", detail: "Allow Location and refresh page" });
+    //       this.city = "Tbilisi"
+    //       this.getCity();
+    //     }
+    //   })
+    // } else {
+    //   this.messageService.add({ severity: 'error', summary: 'Error', detail: "Location servise isn't supported your browser" });
+    //   this.city="tbilisi";
+    //   this.getCity();
+    // }
+    this.city = 'Tbilisi'
+    this.getCity();
   }
 
   ngOnInit(): void {
