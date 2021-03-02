@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Output, ViewChild,EventEmitter, AfterViewInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { fromEvent, of } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { cityType } from 'src/app/shared/interfaces/cityType';
 import { GetCitiesService } from 'src/app/shared/services/cities/get-cities.service';
@@ -19,17 +19,20 @@ export class DetailsComponent implements OnInit {
   city: string;
   choosenCity: any;
   cityInfo: any;
-  constructor(private getCities: GetCitiesService, private getWeatherService: GetWeatherService, private messageService: MessageService) {
-    this.cities = this.getCities.getAll();
+  constructor(
+    private getCities: GetCitiesService,
+    private getWeatherService: GetWeatherService,
+    private messageService: MessageService,
+    ) {
     // if(navigator.geolocation){
-    //   navigator.geolocation.getCurrentPosition((position)=>{
-    //     this.getCity(position.coords.latitude, position.coords.longitude)
+      //   navigator.geolocation.getCurrentPosition((position)=>{
+        //     this.getCity(position.coords.latitude, position.coords.longitude)
     //   });
     //   navigator.permissions.query({name:'geolocation'}).then((result) => {
-    //     if(result.state === 'denied'){
-    //       this.messageService.add({ severity: 'error', summary: "Location servise isn't Allowed", detail: "Allow Location and refresh page" });
-    //       this.city = "Tbilisi"
-    //       this.getCity();
+      //     if(result.state === 'denied'){
+        //       this.messageService.add({ severity: 'error', summary: "Location servise isn't Allowed", detail: "Allow Location and refresh page" });
+        //       this.city = "Tbilisi"
+        //       this.getCity();
     //     }
     //     if(result.state === 'prompt'){
     //       this.messageService.add({ severity: 'error', summary: "Location servise isn't Allowed", detail: "Allow Location and refresh page" });
@@ -38,17 +41,20 @@ export class DetailsComponent implements OnInit {
     //     }
     //   })
     // } else {
-    //   this.messageService.add({ severity: 'error', summary: 'Error', detail: "Location servise isn't supported your browser" });
-    //   this.city="tbilisi";
-    //   this.getCity();
-    // }
-    this.city = 'Tbilisi'
+      //   this.messageService.add({ severity: 'error', summary: 'Error', detail: "Location servise isn't supported your browser" });
+      //   this.city="tbilisi";
+      //   this.getCity();
+      // }
+    if(localStorage.getItem('city')){
+      this.city = localStorage.getItem('city');
+    }else{
+      this.city = 'Tbilisi'
+    }
+    this.cities = this.getCities.getAll();
     this.getCity();
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   cityClick(event) {
     this.city = event.target.innerText;
@@ -57,6 +63,7 @@ export class DetailsComponent implements OnInit {
   }
   getCity(latitude?: number, longitude?: number) {
     this.cityChanded.emit('true');
+    localStorage.setItem('city', this.city)
     if(!longitude && !latitude){
       this.getWeatherService.get(this.city).pipe(
         catchError((error) => {
